@@ -44,7 +44,7 @@
       android:layout_marginTop="32dp"
       android:background="@drawable/button_background"
       android:onClick="@+id/Login"
-      android:text="Validar"
+      android:text="Validar "
       android:textColor="@color/redBus"
       app:backgroundTint="#F6F2F2"
       app:layout_constraintEnd_toEndOf="parent"
