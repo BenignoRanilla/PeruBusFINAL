@@ -8,6 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="redBus">#800B0D</color>
-    <color name="colorPrimaryDark">transparent</color>
     <color name="fondoTotal">#E5E5E5</color>
 </resources>
