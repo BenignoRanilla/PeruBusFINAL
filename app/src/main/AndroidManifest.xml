@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools"
 package="com.ruta.perubus">
 
@@ -39,7 +41,8 @@ package="com.ruta.perubus">
         android:label="@string/title_activity_home" />
     <activity android:name="com.ruta.perubus.RegistroActivity"></activity>
     <activity android:name="com.ruta.perubus.RecoverypassActivity"></activity>
+    <activity android:name="com.ruta.perubus.ResetpassActivity"></activity>
+    <activity android:name="com.ruta.perubus.TerminoscondicionesActivity"></activity>
 </application>
 
 </manifest>
-
