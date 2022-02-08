@@ -1,3 +1,10 @@
 package com.ruta.perubus.models
 
-data class User(val nroCelular:String, val contrasenia:String, val nombres:String, val apellidos:String, val correo:String, val origen:String)
+data class User(
+    var nroCelular:String? = null,
+    var contrasenia:String? = null,
+    var nombres:String? = null,
+    var apellidos:String? = null,
+    var correo:String? = null,
+    var origen:String? = null
+    )

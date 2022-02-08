@@ -3,7 +3,7 @@ package com.ruta.perubus
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -15,15 +15,15 @@ import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthProvider
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.ruta.perubus.api.Api
 import com.ruta.perubus.api.RetrofitClient
-import com.ruta.perubus.service.LoginResponse
-import com.ruta.perubus.storage.SharedPrefManager
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.ruta.perubus.models.LoggedInUser
+import org.json.JSONObject
+import retrofit2.*
+import retrofit2.converter.scalars.ScalarsConverterFactory
+import java.lang.Exception
 
 enum class ProviderType {
     Facebook
@@ -32,64 +32,42 @@ enum class ProviderType {
 class CredentialActivity : AppCompatActivity() {
 
     private val callbackManager = CallbackManager.Factory.create()
+    private lateinit var user: LoggedInUser
+    private lateinit var service: Api
+    private lateinit var retrofit: Retrofit
+    val loginUser = LoggedInUser()
+    val apiService = RetrofitClient.buildService(Api::class.java)
+//    val requestCall = apiService.userLogin(NroCelular, Contrasenia)
 
     @Override
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        service = createApiService()
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
         setContentView(R.layout.activity_credential)
-
-        val Login: Button = findViewById(R.id.Login)
+        val loginUser: Button = findViewById(R.id.LoginUser)
         val username: EditText = findViewById(R.id.username)
         val password: EditText = findViewById(R.id.password)
         val facebook: Button = findViewById(R.id.login_button)
         val textError = "Usuario no encontrado"
         val duration = Toast.LENGTH_SHORT
 
-        Login.setOnClickListener(View.OnClickListener() {
-            val email = username.text.toString().trim()
-            val password = password.text.toString().trim()
+        loginUser.setOnClickListener {
+            val NroCelular = username.text.toString().trim()
+            val Contrasenia = password.text.toString().trim()
 
-            if(email.isEmpty()){
-                username.error = "Email required"
-                username.requestFocus()
-                return@setOnClickListener
+            if (NroCelular.isNotEmpty()) {
+                if (Contrasenia.isNotEmpty()) {
+                    executeLogin(NroCelular, Contrasenia)
+                }else{
+                    Toast.makeText(this@CredentialActivity, "Contraseña vacía", Toast.LENGTH_SHORT).show()
+                }
+            }else{
+                Toast.makeText(this@CredentialActivity, "Email vacio", Toast.LENGTH_SHORT).show()
             }
 
-
-            if(password.isEmpty()){
-                password.error = "Password required"
-                password.requestFocus()
-                return@setOnClickListener
-            }
-
-            RetrofitClient.instance.userLogin(email, password)
-                .enqueue(object: Callback<LoginResponse> {
-                    override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                        Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
-                    }
-
-                    override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                        if(!response.body()?.error!!){
-
-                            SharedPrefManager.getInstance(applicationContext).saveUser(response.body()?.user!!)
-
-                            val intent = Intent(applicationContext, HomeActivity::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-
-                            startActivity(intent)
-
-
-                        }else{
-                            Toast.makeText(applicationContext, textError, duration).show()
-                        }
-
-                    }
-                })
-
-
-        });
+        }
 
         facebook.setOnClickListener {
 
@@ -122,6 +100,40 @@ class CredentialActivity : AppCompatActivity() {
                 })
         }
 
+    }
+
+    private fun executeLogin(NroCelular: String, Contrasenia: String){
+        val call = service.userLogin("loginUser", NroCelular, Contrasenia )
+            call.enqueue(object : Callback<String>{
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    if (response.isSuccessful && response.body() != null){
+                        try {
+                            val jsonUser = JSONObject(response.body()!!)
+                            val jsonId = jsonUser.optString("NroCelular")
+                            val jsonPasswordAuthentication = jsonUser.optString("Contrasenia")
+                            user = LoggedInUser(jsonId, jsonPasswordAuthentication)
+
+                            Toast.makeText(this@CredentialActivity, "Login Correcto", Toast.LENGTH_SHORT).show()
+                        }catch (e: Exception){
+                            Log.d("login", e.toString())
+                            Toast.makeText(this@CredentialActivity, response.body(), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    Log.d("login", t.toString())
+                }
+            })
+
+    }
+
+    private fun createApiService(): Api{
+        retrofit = Retrofit.Builder()
+            .baseUrl("http://181.224.255.236:1001/Usuario/IniciarSesion")
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .build()
+        return retrofit.create(Api::class.java)
     }
 
     private fun showAlert() {

@@ -1,9 +1,9 @@
-package com.ruta.perubus.data.model
+package com.ruta.perubus.models
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository
  */
 data class LoggedInUser(
-    val userId: String,
-    val displayName: String
+    var NroCelular: String? = null,
+    var Contrasenia: String? = null
 )

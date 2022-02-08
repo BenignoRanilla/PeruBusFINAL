@@ -1,6 +1,6 @@
 package com.ruta.perubus.data
 
-import com.ruta.perubus.data.model.LoggedInUser
+import com.ruta.perubus.models.LoggedInUser
 
 /**
  * Class that requests authentication and user information from the remote data source and

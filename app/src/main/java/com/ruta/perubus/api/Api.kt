@@ -1,28 +1,20 @@
 package com.ruta.perubus.api
 
 import android.telecom.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import com.ruta.perubus.models.LoggedInUser
+import com.ruta.perubus.models.User
+import retrofit2.http.*
 import java.lang.StringBuilder
 
 interface Api {
 
-    @FormUrlEncoded
     @POST("Usuario/RegistrarUsuario")
-    fun createUser(
-        @Field("Contrasenia") Contrasenia:String,
-        @Field("Nombres") Nombres:String,
-        @Field("Apellidos") Apellidos:String,
-        @Field("Correo") Correo:String,
-        @Field("NroCelular") NroCelular:String,
-        @Field("Origen") Origen:String
-        )
+    fun createUser(@Body newUser: User): retrofit2.Call<User>
 
-    @FormUrlEncoded
-    @POST("/Usuario/IniciarSesion")
+    @POST("Usuario/IniciarSesion")
     fun userLogin(
-        @Field("NroCelular") NroCelular:String,
-        @Field("Contrasenia") Contrasenia:String
-    )
+        @Field("funcion") function: String,
+        @Field("NroCelular") NroCelular: String,
+        @Field("Contrasenia") Contrasenia: String
+    ): retrofit2.Call<String>
 }

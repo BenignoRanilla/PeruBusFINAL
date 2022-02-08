@@ -21,10 +21,10 @@
 
 
   <Button
-      android:id="@+id/Login"
+      android:id="@+id/LoginCreate"
       android:layout_width="220dp"
       android:layout_height="48dp"
-      android:layout_marginBottom="68dp"
+      android:layout_marginBottom="36dp"
       android:background="@drawable/button_background"
       android:onClick="@+id/Login"
       android:text="Registrar"
@@ -36,7 +36,7 @@
       app:layout_constraintStart_toStartOf="parent" />
 
   <EditText
-      android:id="@+id/editText2"
+      android:id="@+id/nroCelular"
       android:layout_width="320dp"
       android:layout_height="48dp"
       android:layout_marginTop="52dp"
@@ -54,7 +54,7 @@
       app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
   <EditText
-      android:id="@+id/editText3"
+      android:id="@+id/correo"
       android:layout_width="320dp"
       android:layout_height="48dp"
       android:layout_marginTop="20dp"
@@ -69,10 +69,10 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.494"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/editText2" />
+      app:layout_constraintTop_toBottomOf="@+id/nroCelular" />
 
   <EditText
-      android:id="@+id/editText4"
+      android:id="@+id/nombre"
       android:layout_width="320dp"
       android:layout_height="48dp"
       android:layout_marginTop="20dp"
@@ -86,10 +86,27 @@
       android:textColorHint="@color/white"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/editText3"/>
+      app:layout_constraintTop_toBottomOf="@+id/correo"/>
 
   <EditText
-      android:id="@+id/editText5"
+      android:id="@+id/apellido"
+      android:layout_width="320dp"
+      android:layout_height="48dp"
+      android:layout_marginTop="20dp"
+      android:background="@drawable/edit_text_background"
+      android:drawableStart="@drawable/ic_user"
+      android:drawablePadding="10dp"
+      android:inputType="textPersonName"
+      android:ems="10"
+      android:hint="Apellido"
+      android:padding="10dp"
+      android:textColorHint="@color/white"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/nombre"/>
+
+  <EditText
+      android:id="@+id/Pass"
       android:layout_width="320dp"
       android:layout_height="48dp"
       android:layout_marginTop="20dp"
@@ -103,10 +120,10 @@
       android:textColorHint="@color/white"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/editText4" />
+      app:layout_constraintTop_toBottomOf="@+id/apellido" />
 
   <EditText
-      android:id="@+id/editText6"
+      android:id="@+id/passRepeat"
       android:layout_width="320dp"
       android:layout_height="48dp"
       android:layout_marginTop="20dp"
@@ -120,10 +137,10 @@
       android:textColorHint="@color/white"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/editText5" />
+      app:layout_constraintTop_toBottomOf="@+id/Pass" />
 
   <CheckBox
-      android:id="@+id/checkBox"
+      android:id="@+id/checkBoxRegistro"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="20dp"
@@ -132,7 +149,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.498"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/editText6" />
+      app:layout_constraintTop_toBottomOf="@+id/passRepeat" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
