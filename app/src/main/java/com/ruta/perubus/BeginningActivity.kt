@@ -11,13 +11,12 @@ class BeginningActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_beginning)
 
-        val ingresar: Button = findViewById(R.id.registro)
-        val button: Button = findViewById(R.id.Ingresar)
-        button.setOnClickListener {
+    }
 
-            setContentView(R.layout.activity_credential)
-        }
-
+    fun getIngresar(view: View){
+        val intent = Intent(this, CredentialActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     fun getRegistro(view: View){

@@ -35,31 +35,29 @@ class CredentialActivity : AppCompatActivity() {
     private lateinit var user: LoggedInUser
     private lateinit var service: Api
     private lateinit var retrofit: Retrofit
-    val loginUser = LoggedInUser()
-    val apiService = RetrofitClient.buildService(Api::class.java)
+    private var celular: String = ""
+    private var pass: String = ""
 //    val requestCall = apiService.userLogin(NroCelular, Contrasenia)
 
     @Override
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_credential)
         service = createApiService()
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
-        setContentView(R.layout.activity_credential)
         val loginUser: Button = findViewById(R.id.LoginUser)
         val username: EditText = findViewById(R.id.username)
         val password: EditText = findViewById(R.id.password)
         val facebook: Button = findViewById(R.id.login_button)
-        val textError = "Usuario no encontrado"
-        val duration = Toast.LENGTH_SHORT
 
         loginUser.setOnClickListener {
-            val NroCelular = username.text.toString().trim()
-            val Contrasenia = password.text.toString().trim()
+            celular = username.text.toString().trim()
+            pass = password.text.toString().trim()
 
-            if (NroCelular.isNotEmpty()) {
-                if (Contrasenia.isNotEmpty()) {
-                    executeLogin(NroCelular, Contrasenia)
+            if (celular.isNotEmpty()) {
+                if (pass.isNotEmpty()) {
+                    executeLogin(celular, pass)
                 }else{
                     Toast.makeText(this@CredentialActivity, "Contraseña vacía", Toast.LENGTH_SHORT).show()
                 }
@@ -103,7 +101,7 @@ class CredentialActivity : AppCompatActivity() {
     }
 
     private fun executeLogin(NroCelular: String, Contrasenia: String){
-        val call = service.userLogin("loginUser", NroCelular, Contrasenia )
+        val call = service.userLogin("userLogin", NroCelular, Contrasenia )
             call.enqueue(object : Callback<String>{
                 override fun onResponse(call: Call<String>, response: Response<String>) {
                     if (response.isSuccessful && response.body() != null){
@@ -130,7 +128,7 @@ class CredentialActivity : AppCompatActivity() {
 
     private fun createApiService(): Api{
         retrofit = Retrofit.Builder()
-            .baseUrl("http://181.224.255.236:1001/Usuario/IniciarSesion")
+            .baseUrl("http://181.224.255.236:1001/")
             .addConverterFactory(ScalarsConverterFactory.create())
             .build()
         return retrofit.create(Api::class.java)
