@@ -60,6 +60,9 @@ class CredentialActivity : AppCompatActivity() {
                     executeLogin(celular, pass)
                 }else{
                     Toast.makeText(this@CredentialActivity, "Contraseña vacía", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, MapsActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 }
             }else{
                 Toast.makeText(this@CredentialActivity, "Email vacio", Toast.LENGTH_SHORT).show()
@@ -100,21 +103,21 @@ class CredentialActivity : AppCompatActivity() {
 
     }
 
-    private fun executeLogin(NroCelular: String, Contrasenia: String){
-        val call = service.userLogin("userLogin", NroCelular, Contrasenia )
+    private fun executeLogin(celular: String, pass: String){
+        val call = service.userLogin("userLogin", celular, pass )
             call.enqueue(object : Callback<String>{
                 override fun onResponse(call: Call<String>, response: Response<String>) {
-                    if (response.isSuccessful && response.body() != null){
+                    if (response.isSuccessful){
                         try {
                             val jsonUser = JSONObject(response.body()!!)
                             val jsonId = jsonUser.optString("NroCelular")
-                            val jsonPasswordAuthentication = jsonUser.optString("Contrasenia")
-                            user = LoggedInUser(jsonId, jsonPasswordAuthentication)
+                            val jsonPassword = jsonUser.optString("Contrasenia")
+                            user = LoggedInUser(jsonId, jsonPassword)
 
                             Toast.makeText(this@CredentialActivity, "Login Correcto", Toast.LENGTH_SHORT).show()
                         }catch (e: Exception){
                             Log.d("login", e.toString())
-                            Toast.makeText(this@CredentialActivity, response.body(), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@CredentialActivity, "Login incorrecto", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -144,7 +147,7 @@ class CredentialActivity : AppCompatActivity() {
     }
 
     private fun showHome(email: String, provider: ProviderType){
-        val homeIntent = Intent(this, HomeActivity::class.java).apply {
+        val homeIntent = Intent(this, MapsActivity::class.java).apply {
             putExtra("email", email)
             putExtra("provider", provider.name)
         }

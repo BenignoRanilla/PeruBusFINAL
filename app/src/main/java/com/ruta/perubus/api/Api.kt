@@ -11,7 +11,8 @@ interface Api {
     @POST("Usuario/RegistrarUsuario")
     fun createUser(@Body newUser: User): retrofit2.Call<User>
 
-    @POST("Usuario/IniciarSesion")
+    @FormUrlEncoded
+    @POST("/Usuario/IniciarSesion")
     fun userLogin(
         @Field("funcion") function: String,
         @Field("NroCelular") NroCelular: String,

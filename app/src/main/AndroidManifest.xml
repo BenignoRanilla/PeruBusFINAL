@@ -4,7 +4,8 @@
 xmlns:tools="http://schemas.android.com/tools"
 package="com.ruta.perubus">
 
-<uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
 <uses-sdk xmlns:tools="http://schemas.android.com/tools"
     android:minSdkVersion="19"
