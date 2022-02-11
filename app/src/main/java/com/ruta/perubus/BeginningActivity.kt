@@ -14,7 +14,7 @@ class BeginningActivity : AppCompatActivity() {
     }
 
     fun getIngresar(view: View){
-        val intent = Intent(this, MapsActivity::class.java)
+        val intent = Intent(this, CredentialActivity::class.java)
         startActivity(intent)
         finish()
     }

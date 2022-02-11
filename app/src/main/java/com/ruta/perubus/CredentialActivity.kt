@@ -20,6 +20,7 @@ import com.facebook.appevents.AppEventsLogger;
 import com.ruta.perubus.api.Api
 import com.ruta.perubus.api.RetrofitClient
 import com.ruta.perubus.models.LoggedInUser
+import com.ruta.perubus.models.User
 import org.json.JSONObject
 import retrofit2.*
 import retrofit2.converter.scalars.ScalarsConverterFactory
@@ -57,17 +58,13 @@ class CredentialActivity : AppCompatActivity() {
 
             if (celular.isNotEmpty()) {
                 if (pass.isNotEmpty()) {
-                    executeLogin(celular, pass)
+                     executeLogin(celular, pass)
                 }else{
-                    Toast.makeText(this@CredentialActivity, "Contraseña vacía", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, MapsActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                        Toast.makeText(this@CredentialActivity, "Contraseña vacía", Toast.LENGTH_SHORT).show()
                 }
             }else{
                 Toast.makeText(this@CredentialActivity, "Email vacio", Toast.LENGTH_SHORT).show()
             }
-
         }
 
         facebook.setOnClickListener {
@@ -103,18 +100,31 @@ class CredentialActivity : AppCompatActivity() {
 
     }
 
-    private fun executeLogin(celular: String, pass: String){
-        val call = service.userLogin("userLogin", celular, pass )
-            call.enqueue(object : Callback<String>{
-                override fun onResponse(call: Call<String>, response: Response<String>) {
+    private fun executeLogin(celular: String, pass: String) {
+
+        var ingresar = LoggedInUser()
+        ingresar.NroCelular = celular   //"955160486"
+        ingresar.Contrasenia = pass     //"prueba"
+
+        val apiService = RetrofitClient.buildService(Api::class.java)
+        val requestCall = apiService.userLogin(ingresar)
+
+        requestCall.enqueue(object: retrofit2.Callback<LoggedInUser>{
+
+            override fun onResponse(call: Call<LoggedInUser>, response: Response<LoggedInUser>){
                     if (response.isSuccessful){
                         try {
-                            val jsonUser = JSONObject(response.body()!!)
-                            val jsonId = jsonUser.optString("NroCelular")
-                            val jsonPassword = jsonUser.optString("Contrasenia")
-                            user = LoggedInUser(jsonId, jsonPassword)
+//                            val jsonUser = JSONObject(response.body()!!)
+//                            val jsonId = jsonUser.optString("NroCelular")
+//                            val jsonPassword = jsonUser.optString("Contrasenia")
+//                            user = LoggedInUser(jsonId, jsonPassword)
 
                             Toast.makeText(this@CredentialActivity, "Login Correcto", Toast.LENGTH_SHORT).show()
+
+                            //val intent = Intent(this, MapsActivity::class.java)
+                            //startActivity(intent)
+                            //finish()
+
                         }catch (e: Exception){
                             Log.d("login", e.toString())
                             Toast.makeText(this@CredentialActivity, "Login incorrecto", Toast.LENGTH_SHORT).show()
@@ -122,11 +132,10 @@ class CredentialActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<String>, t: Throwable) {
+            override fun onFailure(call: Call<LoggedInUser>, t: Throwable) {
                     Log.d("login", t.toString())
                 }
-            })
-
+        })
     }
 
     private fun createApiService(): Api{

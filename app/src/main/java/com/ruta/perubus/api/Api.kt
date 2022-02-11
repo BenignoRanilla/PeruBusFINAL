@@ -11,11 +11,11 @@ interface Api {
     @POST("Usuario/RegistrarUsuario")
     fun createUser(@Body newUser: User): retrofit2.Call<User>
 
-    @FormUrlEncoded
+    //@FormUrlEncoded
     @POST("/Usuario/IniciarSesion")
-    fun userLogin(
-        @Field("funcion") function: String,
-        @Field("NroCelular") NroCelular: String,
-        @Field("Contrasenia") Contrasenia: String
-    ): retrofit2.Call<String>
+    fun userLogin(@Body newSession: LoggedInUser): retrofit2.Call<LoggedInUser>
+        //@Field("funcion") function: String,
+        //@Field("NroCelular") NroCelular: String,
+        //@Field("Contrasenia") Contrasenia: String
+    //): retrofit2.Call<String>
 }
