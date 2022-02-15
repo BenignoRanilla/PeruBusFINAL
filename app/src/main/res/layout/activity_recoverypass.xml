@@ -38,7 +38,7 @@
       app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
   <Button
-      android:id="@+id/Login"
+      android:id="@+id/Validar"
       android:layout_width="220dp"
       android:layout_height="48dp"
       android:layout_marginTop="32dp"
