@@ -50,9 +50,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-
-
-
         map.setOnMarkerClickListener(this)
         map.uiSettings.isZoomControlsEnabled = true
 
@@ -78,6 +75,4 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         }
 
     }
-
-
 }

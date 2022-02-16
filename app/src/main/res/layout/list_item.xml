@@ -29,8 +29,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/Day"
-                android:text="Today"
+                android:id="@+id/fechaProg"
+                android:text="fechaProg"
                 android:paddingStart="70dp"
                 android:textColor="@color/black"
                 android:layout_centerHorizontal="true"
@@ -40,10 +40,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/lastMesage"
+                android:id="@+id/codBus"
                 android:paddingStart="60dp"
+                android:textColor="@color/black"
                 android:layout_marginTop="5dp"
-                android:text="17 April 2019"/>
+                android:text="codBus"/>
             </LinearLayout>
 
         <LinearLayout
@@ -56,30 +57,68 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/personName"
+                android:id="@+id/tipoServicio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="20dp"
                 android:paddingStart="10dp"
-                android:text="Criff la bandi"
+                android:paddingTop="20dp"
+                android:text="tipoServicio"
                 android:textColor="@color/black"
                 android:textSize="26sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/lastMesage"
+            <LinearLayout
+                android:id="@+id/viewDestino"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="10dp"
-                android:layout_marginTop="5dp"
-                android:text="Publicado 10 min" />
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="-80dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/duracion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:paddingStart="10dp"
+                    android:text="duracion"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/distancia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:paddingStart="10dp"
+                    android:text="distancia"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/viewDestino"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="-80dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/map3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:paddingStart="10dp"
+                    android:text="map3"
+                    android:textColor="@color/black" />
+            </LinearLayout>
             <Button
                 android:layout_width="150dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/repeat_background"
-                android:text="Repeat Never"/>
+                android:text="Seleccionar" />
         </LinearLayout>
+
     </RelativeLayout>
 
 
