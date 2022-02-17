@@ -21,6 +21,9 @@
         tools:replace="android:usesCleartextTraffic"
         tools:targetApi="m">
         <activity
+            android:name="com.ruta.perubus.BuslocationActivity"
+            android:exported="false" />
+        <activity
             android:name="com.ruta.perubus.EditarperfilActivity"
             android:exported="false" />
 

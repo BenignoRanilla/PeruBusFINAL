@@ -109,22 +109,15 @@ class CredentialActivity : AppCompatActivity() {
 
         val apiService = RetrofitClient.buildService(Api::class.java)
         val requestCall = apiService.userLogin(ingresar)
+        val intent = Intent(this, SelectbusActivity::class.java)
 
         requestCall.enqueue(object: retrofit2.Callback<LoggedInUser>{
 
             override fun onResponse(call: Call<LoggedInUser>, response: Response<LoggedInUser>){
                     if (response.isSuccessful){
                         try {
-//                            val jsonUser = JSONObject(response.body()!!)
-//                            val jsonId = jsonUser.optString("NroCelular")
-//                            val jsonPassword = jsonUser.optString("Contrasenia")
-//                            user = LoggedInUser(jsonId, jsonPassword)
-
                             Toast.makeText(this@CredentialActivity, "Login Correcto", Toast.LENGTH_SHORT).show()
-
-                            //val intent = Intent(this, MapsActivity::class.java)
-                            //startActivity(intent)
-                            //finish()
+                            startActivity(intent)
 
                         }catch (e: Exception){
                             Log.d("login", e.toString())

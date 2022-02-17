@@ -7,7 +7,6 @@ android {
     compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
-
     defaultConfig {
         applicationId "com.ruta.perubus"
         minSdk 19
@@ -28,6 +27,7 @@ android {
     buildFeatures{
         viewBinding true
     }
+
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

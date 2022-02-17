@@ -18,36 +18,52 @@ class SelectbusActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val codBus = arrayOf(
-            "0630"
+            "0630",
+            "0590",
+            "0490",
+            "0290"
         )
 
         val fechaProg = arrayOf(
-            "2020-02-07"
+            "2020-02-07",
+            "2020-02-08",
+            "2020-02-08",
+            "2020-03-08"
         )
 
         val map3 = arrayOf(
-            "Santiago de Surco"
+            "Santiago de Surco",
+            "Surquillo",
+            "La Victoria",
+            "La Molina"
         )
 
         val tipoServicio = arrayOf(
-            "SERV.ESTANDAR"
+            "SERV. ESTANDAR",
+            "SERV. VIP",
+            "SERV. ESTANDAR",
+            "SERV. VIP"
         )
 
         val distancia = arrayOf(
-            "280 km"
+            "280 km",
+            "320 km",
+            "330 km",
+            "250 km"
         )
 
         val duracion = arrayOf(
-            "3 hours 44 mins"
+            "3 hours 44 mins",
+            "2 hours 15 mins",
+            "1 hours 15 mins",
+            "2 hours 35 mins"
         )
 
         userArrayList = ArrayList()
 
         for(i in codBus.indices){
-
             val bus = Bus(fechaProg[i], codBus[i], tipoServicio[i], map3[i], distancia[i], duracion[i])
             userArrayList.add(bus)
-
         }
 
         binding.listview.isClickable = true
@@ -61,7 +77,7 @@ class SelectbusActivity : AppCompatActivity() {
             val distancia = distancia[position]
             val duracion = duracion[position]
 
-            val i = Intent(this, MapsActivity::class.java)
+            val i = Intent(this, BuslocationActivity::class.java)
             i.putExtra("codBus", codBus)
             i.putExtra("fechProg", fechaProg)
             i.putExtra("map3", map3)
