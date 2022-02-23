@@ -39,7 +39,6 @@ class CredentialActivity : AppCompatActivity() {
     private lateinit var retrofit: Retrofit
     private var celular: String = ""
     private var pass: String = ""
-//    val requestCall = apiService.userLogin(NroCelular, Contrasenia)
 
     @Override
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -104,8 +103,8 @@ class CredentialActivity : AppCompatActivity() {
     private fun executeLogin(celular: String, pass: String) {
 
         var ingresar = LoggedInUser()
-        ingresar.NroCelular = celular   //"955160486"
-        ingresar.Contrasenia = pass     //"prueba"
+        ingresar.NroCelular = celular
+        ingresar.Contrasenia = pass
 
         val apiService = RetrofitClient.buildService(Api::class.java)
         val requestCall = apiService.userLogin(ingresar)

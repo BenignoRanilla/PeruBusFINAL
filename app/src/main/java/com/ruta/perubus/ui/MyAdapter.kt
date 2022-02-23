@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.ruta.perubus.R
 import com.ruta.perubus.models.Bus
+import com.ruta.perubus.models.Itinerario
 import org.w3c.dom.Text
 
 class MyAdapter(private val context: Activity, private val arraylist: ArrayList<Bus>): ArrayAdapter<Bus>(context,

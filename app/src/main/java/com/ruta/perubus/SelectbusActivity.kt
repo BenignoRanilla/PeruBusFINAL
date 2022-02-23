@@ -1,21 +1,71 @@
 package com.ruta.perubus
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import com.ruta.perubus.api.Api
+import com.ruta.perubus.api.RetrofitClient
 import com.ruta.perubus.databinding.ActivitySelectbusBinding
 import com.ruta.perubus.models.Bus
+import com.ruta.perubus.models.Origen
 import com.ruta.perubus.ui.MyAdapter
+import retrofit2.Retrofit
+import retrofit2.converter.scalars.ScalarsConverterFactory
 
 class SelectbusActivity : AppCompatActivity() {
 
+    private val URL_ORIGEN_SPINNER =
+        "http://181.224.255.236:1001/Tramos/ObtenerOrigen"
+
     private lateinit var binding: ActivitySelectbusBinding
     private lateinit var userArrayList : ArrayList<Bus>
+    private lateinit var retrofit: Retrofit
+    private lateinit var service: Api
+    var origenArrayList : ArrayList<Origen> = arrayListOf()
+    lateinit var opcionesOrigen: Spinner
+    lateinit var opcionesDestino: Spinner
+    lateinit var origenTxt: TextView
+    lateinit var Destinotxt: TextView
 
+    val context = this
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySelectbusBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val apiService = RetrofitClient.buildService(Api::class.java)
+//        val requestCall = apiService.ObtenerOrigen(newOrigin = String)
+
+        opcionesOrigen = findViewById(R.id.SpinnerOrigen)
+        opcionesDestino = findViewById(R.id.SpinnerDestino)
+        origenTxt = findViewById(R.id.origenText)
+
+        val lista = listOf("Ica", "Lima", "Chincha", "Pisco", "Cañete")
+        service = createApiService()
+        val adaptador = ArrayAdapter(this, android.R.layout.simple_spinner_item, lista)
+        opcionesOrigen.adapter = adaptador
+        opcionesOrigen.onItemSelectedListener = object :
+             AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+               origenTxt.setText(opcionesOrigen.selectedItem.toString())
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
+
 
         val codBus = arrayOf(
             "0630",
@@ -88,4 +138,15 @@ class SelectbusActivity : AppCompatActivity() {
         }
 
     }
+
+    private fun createApiService(): Api{
+        retrofit = Retrofit.Builder()
+            .baseUrl("http://181.224.255.236:1001/")
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .build()
+        return retrofit.create(Api::class.java)
+    }
+
+
 }
+

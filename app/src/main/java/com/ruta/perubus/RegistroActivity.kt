@@ -28,7 +28,7 @@ class RegistroActivity : AppCompatActivity() {
         val apellido: EditText = findViewById(R.id.apellido)
         val pass: EditText = findViewById(R.id.Pass)
         val check: CheckBox = findViewById(R.id.checkBoxRegistro)
-        val intent = Intent(this, RegistroActivity::class.java)
+        val intent = Intent(this, CredentialActivity::class.java)
 
         login.setOnClickListener {
             val newUser = User()

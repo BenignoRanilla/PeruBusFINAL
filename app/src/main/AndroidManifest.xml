@@ -48,9 +48,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.ruta.perubus.HomeActivity"
-            android:label="@string/title_activity_home" />
         <activity android:name="com.ruta.perubus.RegistroActivity" />
         <activity android:name="com.ruta.perubus.RecoverypassActivity" />
         <activity android:name="com.ruta.perubus.ResetpassActivity" />

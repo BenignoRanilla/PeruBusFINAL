@@ -5,110 +5,89 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SelectbusActivity"
-    android:background="@drawable/fondoselectbus">
+    android:background="@color/redBus">
 
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="230dp"
         android:clickable="true"
-        app:layout_constraintTop_toBottomOf="@+id/Destino"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/SpinnerDestino"
         tools:layout_editor_absoluteX="0dp"
         tools:listitem="@layout/list_item" />
-
     <Spinner
-        android:id="@+id/Origen"
+        android:id="@+id/SpinnerOrigen"
         android:layout_width="280dp"
+        android:backgroundTint="@color/white"
         android:layout_height="60dp"
         android:layout_marginTop="28dp"
-        android:hint="Número de celular"
-        android:background="@drawable/repeat_background"
+        android:spinnerMode="dialog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/Destino"
+        android:id="@+id/SpinnerDestino"
         android:layout_width="280dp"
         android:layout_height="60dp"
+        android:backgroundTint="@color/white"
         android:layout_marginTop="20dp"
-        android:background="@drawable/repeat_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Origen" />
+        app:layout_constraintTop_toBottomOf="@+id/SpinnerOrigen" />
 
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:id="@+id/bottonmenu"-->
-<!--        android:layout_width="409dp"-->
-<!--        android:layout_height="80dp"-->
-<!--        android:orientation="horizontal"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        android:background="@color/white">-->
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="50dp"
+        android:text="Origen: "
+        android:textStyle="bold"
+        android:textSize="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SpinnerDestino" />
 
-<!--        <ImageButton-->
-<!--            android:id="@+id/imageButton"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="35dp"-->
-<!--            android:background="@android:color/transparent"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintVertical_bias="0.434"-->
-<!--            app:srcCompat="@drawable/menuitem1" />-->
+    <TextView
+        android:id="@+id/origenText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="24dp"
+        android:text="txtOrigen"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/SpinnerDestino" />
 
-<!--        <ImageButton-->
-<!--            android:id="@+id/imageButton2"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="44dp"-->
-<!--            android:background="@android:color/transparent"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/imageButton"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintVertical_bias="0.434"-->
-<!--            app:srcCompat="@drawable/menuitem2" />-->
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="24dp"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:text="Destino: "
+        app:layout_constraintStart_toEndOf="@+id/origenText"
+        app:layout_constraintTop_toBottomOf="@+id/SpinnerDestino" />
 
-<!--        <ImageButton-->
-<!--            android:id="@+id/imageButton3"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="@android:color/transparent"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toStartOf="@+id/imageButton4"-->
-<!--            app:layout_constraintHorizontal_bias="0.6"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/imageButton2"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintVertical_bias="0.422"-->
-<!--            app:srcCompat="@drawable/menuitem3" />-->
-
-<!--        <ImageButton-->
-<!--            android:id="@+id/imageButton4"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginEnd="44dp"-->
-<!--            android:background="@android:color/transparent"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toStartOf="@+id/imageButton5"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintVertical_bias="0.434"-->
-<!--            app:srcCompat="@drawable/menuitem4" />-->
-
-<!--        <ImageButton-->
-<!--            android:id="@+id/imageButton5"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginEnd="35dp"-->
-<!--            android:background="@android:color/transparent"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:srcCompat="@drawable/menuitem5" />-->
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+    <TextView
+        android:id="@+id/Destinotxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="24dp"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:text="Destinotxt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/SpinnerDestino" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
