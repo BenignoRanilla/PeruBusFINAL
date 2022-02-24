@@ -1,19 +1,24 @@
-package com.ruta.perubus
+package com.ruta.perubus.ui.select
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.ruta.perubus.BuslocationActivity
+import com.ruta.perubus.R
 import com.ruta.perubus.api.Api
 import com.ruta.perubus.api.RetrofitClient
 import com.ruta.perubus.databinding.ActivitySelectbusBinding
 import com.ruta.perubus.models.Bus
 import com.ruta.perubus.models.Origen
 import com.ruta.perubus.ui.MyAdapter
+import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 
@@ -23,10 +28,10 @@ class SelectbusActivity : AppCompatActivity() {
         "http://181.224.255.236:1001/Tramos/ObtenerOrigen"
 
     private lateinit var binding: ActivitySelectbusBinding
-    private lateinit var userArrayList : ArrayList<Bus>
+    private lateinit var userArrayList: ArrayList<Bus>
     private lateinit var retrofit: Retrofit
     private lateinit var service: Api
-    var origenArrayList : ArrayList<Origen> = arrayListOf()
+    var origenArrayList: ArrayList<Origen> = arrayListOf()
     lateinit var opcionesOrigen: Spinner
     lateinit var opcionesDestino: Spinner
     lateinit var origenTxt: TextView
@@ -38,26 +43,50 @@ class SelectbusActivity : AppCompatActivity() {
         binding = ActivitySelectbusBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         val apiService = RetrofitClient.buildService(Api::class.java)
-//        val requestCall = apiService.ObtenerOrigen(newOrigin = String)
+        val requestCall = apiService.ObtenerOrigen()
 
         opcionesOrigen = findViewById(R.id.SpinnerOrigen)
         opcionesDestino = findViewById(R.id.SpinnerDestino)
         origenTxt = findViewById(R.id.origenText)
 
         val lista = listOf("Ica", "Lima", "Chincha", "Pisco", "Cañete")
+
+
+        var originList: List<Origen>
+
+
+        requestCall.enqueue(object : retrofit2.Callback<List<Origen>> {
+
+            override fun onResponse(call: Call<List<Origen>>, response: Response<List<Origen>>) {
+                if (response.isSuccessful) {
+                    try {
+                        originList = response.body()!!
+
+                    } catch (e: Exception) {
+                        Log.d("login", e.toString())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<List<Origen>>, t: Throwable) {
+                Log.d("login", t.toString())
+            }
+        })
+
         service = createApiService()
         val adaptador = ArrayAdapter(this, android.R.layout.simple_spinner_item, lista)
         opcionesOrigen.adapter = adaptador
         opcionesOrigen.onItemSelectedListener = object :
-             AdapterView.OnItemSelectedListener{
+            AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
                 position: Int,
                 id: Long
             ) {
-               origenTxt.setText(opcionesOrigen.selectedItem.toString())
+                origenTxt.setText(opcionesOrigen.selectedItem.toString())
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -111,14 +140,15 @@ class SelectbusActivity : AppCompatActivity() {
 
         userArrayList = ArrayList()
 
-        for(i in codBus.indices){
-            val bus = Bus(fechaProg[i], codBus[i], tipoServicio[i], map3[i], distancia[i], duracion[i])
+        for (i in codBus.indices) {
+            val bus =
+                Bus(fechaProg[i], codBus[i], tipoServicio[i], map3[i], distancia[i], duracion[i])
             userArrayList.add(bus)
         }
 
         binding.listview.isClickable = true
         binding.listview.adapter = MyAdapter(this, userArrayList)
-        binding.listview.setOnItemClickListener{parent, view, position, id ->
+        binding.listview.setOnItemClickListener { parent, view, position, id ->
 
             val codBus = codBus[position]
             val fechaProg = fechaProg[position]
@@ -139,7 +169,7 @@ class SelectbusActivity : AppCompatActivity() {
 
     }
 
-    private fun createApiService(): Api{
+    private fun createApiService(): Api {
         retrofit = Retrofit.Builder()
             .baseUrl("http://181.224.255.236:1001/")
             .addConverterFactory(ScalarsConverterFactory.create())

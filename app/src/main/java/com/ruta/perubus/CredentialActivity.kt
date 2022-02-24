@@ -21,8 +21,9 @@ import com.facebook.appevents.AppEventsLogger;
 import com.ruta.perubus.api.Api
 import com.ruta.perubus.api.RetrofitClient
 import com.ruta.perubus.models.LoggedInUser
-import com.ruta.perubus.models.User
-import org.json.JSONObject
+import com.ruta.perubus.ui.select.SelectBusActivityNew
+import com.ruta.perubus.ui.select.SelectbusActivity
+
 import retrofit2.*
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.lang.Exception
@@ -108,7 +109,7 @@ class CredentialActivity : AppCompatActivity() {
 
         val apiService = RetrofitClient.buildService(Api::class.java)
         val requestCall = apiService.userLogin(ingresar)
-        val intent = Intent(this, SelectbusActivity::class.java)
+        val intent = Intent(this, SelectBusActivityNew::class.java)
 
         requestCall.enqueue(object: retrofit2.Callback<LoggedInUser>{
 

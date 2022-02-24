@@ -1,9 +1,7 @@
 package com.ruta.perubus.api
 
-import android.telecom.Call
 import com.ruta.perubus.models.*
 import retrofit2.http.*
-import java.lang.StringBuilder
 
 interface Api {
 
@@ -16,12 +14,15 @@ interface Api {
     @PUT("Usuario/ModificarUsuario/{CoUsua}")
     fun resetPassword(@Body reset: ResetPass): retrofit2.Call<ResetPass>
 
-    @PUT ("Usuario/ModificarUsuario/{CoUsua}")
+    @PUT("Usuario/ModificarUsuario/{CoUsua}")
     fun editProfile(@Body editUser: EditUser): retrofit2.Call<EditUser>
 
-    @POST("/TdprogItin/ObtenerItinerario/{GPSOrigen}")
-    fun ObtenerItinerario(@Body newItinerario: Itinerario): retrofit2.Call<Itinerario>
+    @POST("/TdprogItin/ObtenerItinerario/{position}")
+    fun ObtenerItinerario(@Path("position") position: String, @Body itinerario: ItinerarioInput): retrofit2.Call<List<Itinerario>>
 
     @GET("/Tramos/ObtenerOrigen")
-    fun ObtenerOrigen(@Body newOrigin: String.Companion): retrofit2.Call<Origen>
+    fun ObtenerOrigen(): retrofit2.Call<List<Origen>>
+
+    @GET("/Tramos/ObtenerDestinoRumbo/{origin}")
+    fun obtenerDestino(@Path("origin") origin: String): retrofit2.Call<List<Destino>>
 }

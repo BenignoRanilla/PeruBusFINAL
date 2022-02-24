@@ -13,6 +13,9 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
 
+
+
+
 //    private val AUTH = "DEMO "+ Base64.encodeToString("DEMO".toByteArray(), Base64.NO_WRAP)
     private const val URL = "http://181.224.255.236:1001/"
     // Create Logger

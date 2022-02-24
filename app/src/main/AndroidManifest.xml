@@ -8,6 +8,7 @@
         android:targetSdkVersion="31" />
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -20,22 +21,40 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:usesCleartextTraffic"
         tools:targetApi="m">
+
+        <!--
+             TODO: Before you run your application, you need a Google Maps API key.
+
+             To get one, follow the directions here:
+
+                https://developers.google.com/maps/documentation/android-sdk/get-api-key
+
+             Once you have your API key (it starts with "AIza"), define a new property in your
+             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
+             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="YOUR_API_KEY" />
+
+        <activity
+            android:name="com.ruta.perubus.ui.map.MapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_maps" />
         <activity
             android:name="com.ruta.perubus.BuslocationActivity"
             android:exported="false" />
         <activity
             android:name="com.ruta.perubus.EditarperfilActivity"
             android:exported="false" />
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-
         <activity
             android:name="com.ruta.perubus.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name="com.ruta.perubus.SelectbusActivity"
+            android:name="com.ruta.perubus.ui.select.SelectbusActivity"
+            android:label="@string/title_activity_selectbus" />
+        <activity
+            android:name="com.ruta.perubus.ui.select.SelectBusActivityNew"
             android:label="@string/title_activity_selectbus" />
         <activity android:name="com.ruta.perubus.LoginActivity" />
         <activity android:name="com.ruta.perubus.CredentialActivity" />
