@@ -9,8 +9,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:orientation="horizontal"
-        android:background="@color/white">
+        android:background="@drawable/repeat_background">
         <LinearLayout
             android:id="@+id/viewBus"
             android:layout_width="wrap_content"
@@ -32,7 +34,7 @@
                 android:paddingStart="20dp"
                 android:textColor="@color/black"
                 android:layout_centerHorizontal="true"
-                android:textSize="26sp"
+                android:textSize="16sp"
                 android:textStyle="bold"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -83,7 +85,7 @@
 
                 <TextView
                     android:id="@+id/distancia"
-                    android:layout_width="wrap_content"
+                    android:layout_width="78dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:paddingStart="10dp"
@@ -109,12 +111,6 @@
                     android:textColor="@color/black" />
             </LinearLayout>
 
-            <Button
-                android:layout_width="150dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/repeat_background"
-                android:text="Seleccionar" />
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

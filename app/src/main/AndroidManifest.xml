@@ -25,6 +25,9 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:usesCleartextTraffic"
         tools:targetApi="m">
+        <activity
+            android:name="com.ruta.perubus.MapbusActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

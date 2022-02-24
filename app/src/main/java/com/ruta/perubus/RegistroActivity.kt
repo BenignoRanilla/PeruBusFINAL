@@ -27,7 +27,7 @@ class RegistroActivity : AppCompatActivity() {
         val nombre: EditText = findViewById(R.id.nombre)
         val apellido: EditText = findViewById(R.id.apellido)
         val pass: EditText = findViewById(R.id.Pass)
-        val check: CheckBox = findViewById(R.id.checkBoxRegistro)
+//        val check: CheckBox = findViewById(R.id.checkBoxRegistro)
         val intent = Intent(this, CredentialActivity::class.java)
 
         login.setOnClickListener {
@@ -47,7 +47,7 @@ class RegistroActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<User>, response: Response<User>){
                     if (response.isSuccessful){
                         finish()
-                        check.isChecked
+//                        check.isChecked
                         var newCreateUser = response.body()
                         Toast.makeText(context, "Successfully Added", Toast.LENGTH_SHORT).show()
                         startActivity(intent)

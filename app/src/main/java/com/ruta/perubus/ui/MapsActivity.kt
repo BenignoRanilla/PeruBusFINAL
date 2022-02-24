@@ -1,11 +1,13 @@
 package com.ruta.perubus.ui
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.ruta.perubus.R
@@ -31,6 +33,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+        val codbus : TextView = findViewById(R.id.codBus)
+        val fechaProg : TextView = findViewById(R.id.fechaProg)
+        val tipoServicio : TextView = findViewById(R.id.tipoServicio)
+        val duracion : TextView = findViewById(R.id.duracion)
+        val distancia : TextView = findViewById(R.id.distancia)
+
+        codbus.text = markers.codbus
+        fechaProg.text = markers.fechaProg
+        tipoServicio.text = markers.tipoServicio
+        duracion.text = markers.duracion
+        distancia.text = markers.distancia
 
     }
 
@@ -59,7 +72,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         mMap.addMarker(MarkerOptions().position(bus).title("Bus"))
         mMap.addMarker(MarkerOptions().position(user).title("Usuario"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user,16.0f))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user,10.0f))
 
     }
 }

@@ -2,27 +2,41 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     tools:context=".ui.select.SelectbusActivity"
     android:background="@color/redBus">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listview"
+    <LinearLayout
+        android:id="@+id/idItinerario"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="230dp"
-        android:clickable="true"
-        android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/SpinnerDestino"
-        tools:layout_editor_absoluteX="0dp"
-        tools:listitem="@layout/list_item" />
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        android:background="@color/fondoTotal"
+        app:flow_horizontalAlign="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idDatos">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/fondoTotal"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            app:layout_constraintTop_toBottomOf="@+id/idDatos"
+            tools:layout_editor_absoluteX="0dp"
+            tools:listitem="@layout/list_item" />
+
+    </LinearLayout>
     <Spinner
         android:id="@+id/SpinnerOrigen"
         android:layout_width="280dp"
-        android:backgroundTint="@color/white"
         android:layout_height="60dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/white"
         android:spinnerMode="dialog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -33,61 +47,72 @@
         android:id="@+id/SpinnerDestino"
         android:layout_width="280dp"
         android:layout_height="60dp"
-        android:backgroundTint="@color/white"
         android:layout_marginTop="20dp"
+        android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SpinnerOrigen" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="50dp"
-        android:text="Origen: "
-        android:textStyle="bold"
-        android:textSize="15dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SpinnerDestino" />
-
-    <TextView
-        android:id="@+id/origenText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="24dp"
-        android:text="txtOrigen"
-        android:textStyle="bold"
-        android:textSize="15dp"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/SpinnerDestino" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="24dp"
-        android:textStyle="bold"
-        android:textSize="15dp"
-        android:text="Destino: "
-        app:layout_constraintStart_toEndOf="@+id/origenText"
-        app:layout_constraintTop_toBottomOf="@+id/SpinnerDestino" />
-
-    <TextView
-        android:id="@+id/Destinotxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="24dp"
-        android:textStyle="bold"
-        android:textSize="15dp"
-        android:text="Destinotxt"
+    <LinearLayout
+        android:id="@+id/idDatos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:flow_horizontalAlign="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/SpinnerDestino" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SpinnerDestino">
 
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="14dp"
+            android:text="Origen: "
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SpinnerDestino" />
+
+        <TextView
+            android:id="@+id/origenText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="14dp"
+            android:text="txtOrigen"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/SpinnerDestino" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="14dp"
+            android:text="Destino: "
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/origenText"
+            app:layout_constraintTop_toBottomOf="@+id/SpinnerDestino" />
+
+        <TextView
+            android:id="@+id/Destinotxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="14dp"
+            android:text="Destinotxt"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/SpinnerDestino" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

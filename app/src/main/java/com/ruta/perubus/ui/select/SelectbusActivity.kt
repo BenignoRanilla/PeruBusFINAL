@@ -137,37 +137,6 @@ class SelectbusActivity : AppCompatActivity() {
 
         userArrayList = ArrayList()
 
-        /*
-        for (i in codBus.indices) {
-            val bus =
-                Bus(fechaProg[i], codBus[i], tipoServicio[i], map3[i], distancia[i], duracion[i])
-            userArrayList.add(bus)
-        }
-
-
-        binding.listview.isClickable = true
-        binding.listview.adapter = MyAdapter(this, userArrayList)
-        binding.listview.setOnItemClickListener { parent, view, position, id ->
-
-            val codBus = codBus[position]
-            val fechaProg = fechaProg[position]
-            val map3 = map3[position]
-            val tipoServicio = tipoServicio[position]
-            val distancia = distancia[position]
-            val duracion = duracion[position]
-
-            val i = Intent(this, BuslocationActivity::class.java)
-            i.putExtra("codBus", codBus)
-            i.putExtra("fechProg", fechaProg)
-            i.putExtra("map3", map3)
-            i.putExtra("tipoServicio", tipoServicio)
-            i.putExtra("distancia", distancia)
-            i.putExtra("duracion", duracion)
-            startActivity(i)
-        }
-
-         */
-
     }
 
     private fun createApiService(): Api {

@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.ruta.perubus.MapbusActivity
 import com.ruta.perubus.R
 import com.ruta.perubus.api.Api
 import com.ruta.perubus.api.RetrofitClient
@@ -245,7 +246,8 @@ class SelectBusActivityNew : AppCompatActivity(), IBusItemListener {
 
         intent.putExtra(
             "markers",
-            Markers(currentLatitude, currentLongitude, currentItem.latitude, currentItem.longitude)
+            Markers(currentLatitude, currentLongitude, currentItem.latitude, currentItem.longitude, currentItem.codBus, currentItem.fechaProg,
+            currentItem.duracion, currentItem.distancia, currentItem.tipoServicio)
         )
         startActivity(intent)
     }
