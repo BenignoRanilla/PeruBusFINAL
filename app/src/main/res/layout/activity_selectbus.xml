@@ -7,7 +7,7 @@
     tools:context=".ui.select.SelectbusActivity"
     android:background="@color/redBus">
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

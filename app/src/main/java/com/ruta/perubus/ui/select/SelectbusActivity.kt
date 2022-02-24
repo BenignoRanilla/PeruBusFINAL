@@ -1,6 +1,5 @@
 package com.ruta.perubus.ui.select
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,14 +8,12 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.ruta.perubus.BuslocationActivity
 import com.ruta.perubus.R
 import com.ruta.perubus.api.Api
 import com.ruta.perubus.api.RetrofitClient
 import com.ruta.perubus.databinding.ActivitySelectbusBinding
 import com.ruta.perubus.models.Bus
 import com.ruta.perubus.models.Origen
-import com.ruta.perubus.ui.MyAdapter
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -140,11 +137,13 @@ class SelectbusActivity : AppCompatActivity() {
 
         userArrayList = ArrayList()
 
+        /*
         for (i in codBus.indices) {
             val bus =
                 Bus(fechaProg[i], codBus[i], tipoServicio[i], map3[i], distancia[i], duracion[i])
             userArrayList.add(bus)
         }
+
 
         binding.listview.isClickable = true
         binding.listview.adapter = MyAdapter(this, userArrayList)
@@ -166,6 +165,8 @@ class SelectbusActivity : AppCompatActivity() {
             i.putExtra("duracion", duracion)
             startActivity(i)
         }
+
+         */
 
     }
 

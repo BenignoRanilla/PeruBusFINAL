@@ -1,7 +1,6 @@
 package com.ruta.perubus
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,24 +8,25 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
+import com.facebook.FacebookSdk
+import com.facebook.appevents.AppEventsLogger
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 import com.ruta.perubus.api.Api
 import com.ruta.perubus.api.RetrofitClient
 import com.ruta.perubus.models.LoggedInUser
+import com.ruta.perubus.ui.MapsActivity
 import com.ruta.perubus.ui.select.SelectBusActivityNew
-import com.ruta.perubus.ui.select.SelectbusActivity
-
-import retrofit2.*
+import retrofit2.Call
+import retrofit2.Response
+import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
-import java.lang.Exception
 
 enum class ProviderType {
     Facebook
@@ -59,11 +59,12 @@ class CredentialActivity : AppCompatActivity() {
 
             if (celular.isNotEmpty()) {
                 if (pass.isNotEmpty()) {
-                     executeLogin(celular, pass)
-                }else{
-                        Toast.makeText(this@CredentialActivity, "Contraseña vacía", Toast.LENGTH_SHORT).show()
+                    executeLogin(celular, pass)
+                } else {
+                    Toast.makeText(this@CredentialActivity, "Contraseña vacía", Toast.LENGTH_SHORT)
+                        .show()
                 }
-            }else{
+            } else {
                 Toast.makeText(this@CredentialActivity, "Email vacio", Toast.LENGTH_SHORT).show()
             }
         }
@@ -72,8 +73,8 @@ class CredentialActivity : AppCompatActivity() {
 
             LoginManager.getInstance().logInWithReadPermissions(this, listOf("email"))
 
-                LoginManager.getInstance().registerCallback(callbackManager,
-                object  : FacebookCallback<LoginResult>{
+            LoginManager.getInstance().registerCallback(callbackManager,
+                object : FacebookCallback<LoginResult> {
 
                     override fun onSuccess(result: LoginResult?) {
                         result?.let {
@@ -81,20 +82,26 @@ class CredentialActivity : AppCompatActivity() {
 
                             val credential = FacebookAuthProvider.getCredential(token.token)
 
-                            FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener{
-                                if (it.isSuccessful){
-                                    showHome(it.result?.user?.email ?: "", ProviderType.Facebook)
-                                } else{
-                                    showAlert()
+                            FirebaseAuth.getInstance().signInWithCredential(credential)
+                                .addOnCompleteListener {
+                                    if (it.isSuccessful) {
+                                        showHome(
+                                            it.result?.user?.email ?: "",
+                                            ProviderType.Facebook
+                                        )
+                                    } else {
+                                        showAlert()
+                                    }
                                 }
-                            }
                         }
                     }
+
                     override fun onCancel() {
 
                     }
+
                     override fun onError(error: FacebookException?) {
-                            showAlert()
+                        showAlert()
                     }
                 })
         }
@@ -111,28 +118,36 @@ class CredentialActivity : AppCompatActivity() {
         val requestCall = apiService.userLogin(ingresar)
         val intent = Intent(this, SelectBusActivityNew::class.java)
 
-        requestCall.enqueue(object: retrofit2.Callback<LoggedInUser>{
+        requestCall.enqueue(object : retrofit2.Callback<LoggedInUser> {
 
-            override fun onResponse(call: Call<LoggedInUser>, response: Response<LoggedInUser>){
-                    if (response.isSuccessful){
-                        try {
-                            Toast.makeText(this@CredentialActivity, "Login Correcto", Toast.LENGTH_SHORT).show()
-                            startActivity(intent)
+            override fun onResponse(call: Call<LoggedInUser>, response: Response<LoggedInUser>) {
+                if (response.isSuccessful) {
+                    try {
+                        Toast.makeText(
+                            this@CredentialActivity,
+                            "Login Correcto",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        startActivity(intent)
 
-                        }catch (e: Exception){
-                            Log.d("login", e.toString())
-                            Toast.makeText(this@CredentialActivity, "Login incorrecto", Toast.LENGTH_SHORT).show()
-                        }
+                    } catch (e: Exception) {
+                        Log.d("login", e.toString())
+                        Toast.makeText(
+                            this@CredentialActivity,
+                            "Login incorrecto",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
+            }
 
             override fun onFailure(call: Call<LoggedInUser>, t: Throwable) {
-                    Log.d("login", t.toString())
-                }
+                Log.d("login", t.toString())
+            }
         })
     }
 
-    private fun createApiService(): Api{
+    private fun createApiService(): Api {
         retrofit = Retrofit.Builder()
             .baseUrl("http://181.224.255.236:1001/")
             .addConverterFactory(ScalarsConverterFactory.create())
@@ -149,7 +164,7 @@ class CredentialActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun showHome(email: String, provider: ProviderType){
+    private fun showHome(email: String, provider: ProviderType) {
         val homeIntent = Intent(this, MapsActivity::class.java).apply {
             putExtra("email", email)
             putExtra("provider", provider.name)
@@ -157,7 +172,7 @@ class CredentialActivity : AppCompatActivity() {
         startActivity(homeIntent)
     }
 
-    fun getResetPass(view: View){
+    fun getResetPass(view: View) {
         val intent = Intent(this, RecoverypassActivity::class.java)
         startActivity(intent)
         finish()

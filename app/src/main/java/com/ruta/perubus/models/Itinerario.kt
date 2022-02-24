@@ -9,6 +9,9 @@ data class Itinerario(
     @SerializedName("tipoServicio") var tipoServicio: String,
     @SerializedName("map3") var map3: String,
     @SerializedName("distancia") var distancia: String,
-    @SerializedName("duracion") var duracion: String)
+    @SerializedName("duracion") var duracion: String,
+    @SerializedName("latitude") var latitude: String,
+    @SerializedName("longitude") var longitude: String
+)
 
 

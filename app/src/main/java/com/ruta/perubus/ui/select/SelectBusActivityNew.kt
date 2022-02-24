@@ -7,41 +7,40 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
-import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.ruta.perubus.R
 import com.ruta.perubus.api.Api
 import com.ruta.perubus.api.RetrofitClient
 import com.ruta.perubus.databinding.ActivitySelectbusBinding
-import com.ruta.perubus.models.Bus
-import com.ruta.perubus.models.Destino
-import com.ruta.perubus.models.ItinerarioInput
-import com.ruta.perubus.models.Origen
-import com.ruta.perubus.ui.MyAdapter
+import com.ruta.perubus.models.*
+import com.ruta.perubus.ui.MapsActivity
+import com.ruta.perubus.ui.select.adapter.RecyclerAdapter
+import com.ruta.perubus.ui.select.listener.IBusItemListener
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
 import java.util.*
-import kotlin.collections.ArrayList
 
-class SelectBusActivityNew : AppCompatActivity() {
+class SelectBusActivityNew : AppCompatActivity(), IBusItemListener {
 
     private lateinit var binding: ActivitySelectbusBinding
     lateinit var viewModel: SelectBusViewModel
     val PERMISSION_ID = 42
     private lateinit var userArrayList: ArrayList<Bus>
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
+    private lateinit var linearLayoutManager: LinearLayoutManager
+    lateinit var currentLatitude: String
+    lateinit var currentLongitude: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,7 +59,6 @@ class SelectBusActivityNew : AppCompatActivity() {
 
         viewModel.originList.observe(this, Observer {
 
-            //it.toMutableList().prepend(Origen("-1", "Seleccione Origen"))
             val positionAdapter =
                 ArrayAdapter(this, android.R.layout.simple_spinner_item, it).also { adapter ->
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -93,7 +91,6 @@ class SelectBusActivityNew : AppCompatActivity() {
 
         viewModel.destinyList.observe(this, Observer {
 
-            //it.toMutableList().prepend(Origen("-1", "Seleccione Origen"))
             val positionAdapter =
                 ArrayAdapter(this, android.R.layout.simple_spinner_item, it).also { adapter ->
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -127,8 +124,6 @@ class SelectBusActivityNew : AppCompatActivity() {
 
         viewModel.itinerarioList.observe(this, Observer {
 
-            binding.listview.isClickable = true
-
             userArrayList = ArrayList()
             if (it != null) {
                 for (itinerario in it) {
@@ -139,33 +134,24 @@ class SelectBusActivityNew : AppCompatActivity() {
                             itinerario.tipoServicio,
                             itinerario.map3,
                             itinerario.distancia,
-                            itinerario.duracion
+                            itinerario.duracion,
+                            itinerario.latitude,
+                            itinerario.longitude
                         )
                     userArrayList.add(bus)
                 }
 
-                binding.listview.adapter = MyAdapter(this, userArrayList)
+                binding.listview.adapter = RecyclerAdapter(userArrayList, this)
+                binding.listview.layoutManager = LinearLayoutManager(this)
+                binding.listview.setHasFixedSize(true)
+
             }
 
-
         })
-
 
         viewModel.getAllOrigins()
 
     }
-
-    private fun getLocation() {
-
-        /*
-        fusedLocationClient.lastLocation
-            .addOnSuccessListener { location: Location? ->
-                viewModel.getItinerario(location?.longitude.toString() + "-" + (location?.longitude.toString()))
-            }
-
-         */
-    }
-
 
     private fun checkPermissions(): Boolean {
         if (
@@ -212,8 +198,11 @@ class SelectBusActivityNew : AppCompatActivity() {
                 mFusedLocationClient.lastLocation.addOnCompleteListener(this) { task ->
                     var location: Location? = task.result
 
+                    currentLatitude = location?.latitude.toString()
+                    currentLongitude = location?.longitude.toString()
+
                     viewModel.getItinerario(
-                        location?.longitude.toString() + "," + (location?.longitude.toString()),
+                        location?.latitude.toString() + "," + location?.longitude.toString(),
                         ItinerarioInput(
                             getDate(),
                             (binding.SpinnerDestino.selectedItem as Destino).codRumbo,
@@ -234,10 +223,8 @@ class SelectBusActivityNew : AppCompatActivity() {
     }
 
     private fun getDate(): String {
-        //val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
         val sdf = SimpleDateFormat("yyyy-MM-dd")
         val currentDate = sdf.format(Date())
-        //System.out.println(" C DATE is  "+currentDate)
         return currentDate
 
     }
@@ -251,6 +238,16 @@ class SelectBusActivityNew : AppCompatActivity() {
             ),
             PERMISSION_ID
         )
+    }
+
+    override fun onBusItemClickListener(currentItem: Bus) {
+        val intent = Intent(this, MapsActivity::class.java)
+
+        intent.putExtra(
+            "markers",
+            Markers(currentLatitude, currentLongitude, currentItem.latitude, currentItem.longitude)
+        )
+        startActivity(intent)
     }
 
 
