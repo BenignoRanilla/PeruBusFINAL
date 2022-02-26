@@ -247,7 +247,7 @@ class SelectBusActivityNew : AppCompatActivity(), IBusItemListener {
         intent.putExtra(
             "markers",
             Markers(currentLatitude, currentLongitude, currentItem.latitude, currentItem.longitude, currentItem.codBus, currentItem.fechaProg,
-            currentItem.duracion, currentItem.distancia, currentItem.tipoServicio)
+            currentItem.duracion, currentItem.tipoServicio, currentItem.distancia)
         )
         startActivity(intent)
     }

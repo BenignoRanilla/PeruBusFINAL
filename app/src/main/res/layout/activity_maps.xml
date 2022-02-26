@@ -1,97 +1,178 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MapsActivity">
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:orientation="vertical">
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:paddingBottom="0dp"
-        android:layout_height="290dp"
-        android:visibility="gone"
-        android:background="@color/fondoTotal">
+        android:layout_height="match_parent"
+        android:layout_marginTop="-30dp"
+        android:layout_weight="1.0"
+        android:background="@drawable/top_round_border"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/imageBus"
             android:layout_width="match_parent"
             android:layout_height="160dp"
+            android:layout_marginTop="16dp"
             android:src="@drawable/bus_image" />
 
-        <LinearLayout
-            android:id="@+id/viewBus"
-            android:layout_width="205dp"
-            android:layout_height="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_below="@id/imageBus"
-            android:layout_alignParentStart="true"
-            android:layout_marginVertical="10dp"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical">
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp">
 
             <TextView
-                android:id="@+id/fechaProg"
+                android:id="@+id/fechaProgLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingStart="20dp"
+                android:text="Fecha Programada: "
+                android:textColor="@color/redBus"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/fechaProgValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/fechaProgLabel"
                 android:layout_centerHorizontal="true"
+                android:layout_toRightOf="@+id/fechaProgLabel"
+                android:maxLines="1"
                 android:paddingStart="20dp"
-                android:text="fechaProg"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/codBus"
+                android:id="@+id/codBusLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_below="@+id/fechaProgLabel"
+                android:layout_alignStart="@+id/fechaProgLabel"
                 android:paddingStart="20dp"
-                android:text="codBus"
-                android:textColor="@color/black" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/viewBus2"
-            android:layout_width="205dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/imageBus"
-            android:layout_alignParentEnd="true"
-            android:layout_marginVertical="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_toLeftOf="@id/viewBus"
-            android:orientation="vertical">
+                android:text="Código Bus: "
+                android:textColor="@color/redBus"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tipoServicio"
+                android:id="@+id/codBusValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="0dp"
-                android:text="tipoServicio"
+                android:layout_alignBaseline="@+id/codBusLabel"
+                android:layout_alignStart="@+id/fechaProgValue"
+                android:layout_toRightOf="@id/codBusLabel"
+                android:maxLines="1"
+                android:paddingStart="20dp"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/duracion"
+                android:id="@+id/tipoServicioLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:paddingStart="0dp"
-                android:text="duracion"
-                android:textColor="@color/black" />
+                android:layout_below="@+id/codBusLabel"
+                android:layout_alignStart="@+id/codBusLabel"
+                android:paddingStart="20dp"
+                android:text="Tipo Servicio: "
+                android:textColor="@color/redBus"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/distancia"
-                android:layout_width="78dp"
+                android:id="@+id/tipoServicioValue"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="distancia"
-                android:textColor="@color/black" />
+                android:layout_alignBaseline="@+id/tipoServicioLabel"
+                android:layout_alignStart="@+id/fechaProgValue"
+                android:layout_toRightOf="@id/tipoServicioLabel"
+                android:maxLines="1"
+                android:paddingStart="20dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/duracionLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tipoServicioLabel"
+                android:layout_alignStart="@+id/tipoServicioLabel"
+                android:paddingStart="20dp"
+                android:text="Duración: "
+                android:textColor="@color/redBus"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/duracionValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/duracionLabel"
+                android:layout_alignStart="@+id/fechaProgValue"
+                android:layout_toRightOf="@id/duracionLabel"
+                android:maxLines="1"
+                android:paddingStart="20dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/distanciaLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/duracionLabel"
+                android:layout_alignStart="@+id/duracionLabel"
+                android:paddingStart="20dp"
+                android:text="Distancia: "
+                android:textColor="@color/redBus"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/distanciaValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/distanciaLabel"
+                android:layout_alignStart="@+id/fechaProgValue"
+                android:layout_toRightOf="@id/distanciaLabel"
+                android:maxLines="1"
+                android:paddingStart="20dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+
     </RelativeLayout>
-</fragment>
+
+</LinearLayout>

@@ -39,19 +39,18 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        val codbus: TextView = findViewById(R.id.codBus)
-        val fechaProg: TextView = findViewById(R.id.fechaProg)
-        val tipoServicio: TextView = findViewById(R.id.tipoServicio)
-        val duracion: TextView = findViewById(R.id.duracion)
-        val distancia: TextView = findViewById(R.id.distancia)
+
+        val codbus: TextView = findViewById(R.id.codBusValue)
+        val fechaProg: TextView = findViewById(R.id.fechaProgValue)
+        val tipoServicio: TextView = findViewById(R.id.tipoServicioValue)
+        val duracion: TextView = findViewById(R.id.duracionValue)
+        val distancia: TextView = findViewById(R.id.distanciaValue)
 
         codbus.text = markers.codbus
         fechaProg.text = markers.fechaProg
         tipoServicio.text = markers.tipoServicio
         duracion.text = markers.duracion
-        distancia.text = markers.distancia
-
-    }
+        distancia.text = markers.distancia    }
 
     /**
      * Manipulates the map once available.
@@ -97,6 +96,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.setOnMapLoadedCallback {
             mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 100))
         }
+        mMap.uiSettings.isMapToolbarEnabled = false;
 
         val path: MutableList<List<LatLng>> = ArrayList()
         val urlDirections =
