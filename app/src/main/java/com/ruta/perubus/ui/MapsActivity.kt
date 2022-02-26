@@ -7,12 +7,13 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.ruta.perubus.R
 import com.ruta.perubus.databinding.ActivityMapsBinding
 import com.ruta.perubus.models.Markers
+
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -33,11 +34,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        val codbus : TextView = findViewById(R.id.codBus)
-        val fechaProg : TextView = findViewById(R.id.fechaProg)
-        val tipoServicio : TextView = findViewById(R.id.tipoServicio)
-        val duracion : TextView = findViewById(R.id.duracion)
-        val distancia : TextView = findViewById(R.id.distancia)
+        val codbus: TextView = findViewById(R.id.codBus)
+        val fechaProg: TextView = findViewById(R.id.fechaProg)
+        val tipoServicio: TextView = findViewById(R.id.tipoServicio)
+        val duracion: TextView = findViewById(R.id.duracion)
+        val distancia: TextView = findViewById(R.id.distancia)
 
         codbus.text = markers.codbus
         fechaProg.text = markers.fechaProg
@@ -59,7 +60,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        // Add a marker in Sydney and move the camera
+
         val user = LatLng(
             markers.currentLatitude.toDouble(),
             markers.currentLongitude.toDouble()
@@ -70,9 +71,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             markers.busLongitude.toDouble()
         )
 
+        val builder = LatLngBounds.Builder()
+        builder.include(user)
+        builder.include(bus)
+
+
+
         mMap.addMarker(MarkerOptions().position(bus).title("Bus"))
         mMap.addMarker(MarkerOptions().position(user).title("Usuario"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user,10.0f))
+
+        mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 100))
 
     }
+
 }
