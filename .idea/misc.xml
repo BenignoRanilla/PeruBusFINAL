@@ -56,6 +56,24 @@
         <entry key="..\:/Freelance/PeruBus/app/src/main/res/layout/activity_selectbus.xml" value="0.21822916666666667" />
         <entry key="..\:/Freelance/PeruBus/app/src/main/res/layout/activity_terminoscondiciones.xml" value="0.3625" />
         <entry key="..\:/Freelance/PeruBus/app/src/main/res/layout/fragment_home.xml" value="0.16394927536231885" />
+        <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/drawable-v24/button_background.xml" value="0.1995" />
+        <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/drawable-v24/repeat_background.xml" value="0.1995" />
+        <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/drawable/backgroundred.xml" value="0.1995" />
+        <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/drawable/edit_text_background.xml" value="0.1995" />
+        <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/drawable/fondoselectbus.xml" value="0.1995" />
+        <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/drawable/ic_baseline_email.xml" value="0.1995" />
+        <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/drawable/ic_baseline_fingerprint_24.xml" value="0.1995" />
+        <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/drawable/ic_baseline_phone.xml" value="0.1995" />
+        <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/drawable/ic_bus_24.xml" value="0.1995" />
+        <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/drawable/ic_bus_peru.xml" value="0.1995" />
+        <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.1995" />
+        <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/drawable/ic_down_spinner.xml" value="0.1995" />
+        <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1995" />
+        <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1995" />
+        <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/drawable/ic_marcador_bus_foreground.xml" value="0.1995" />
+        <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.1995" />
+        <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/drawable/ic_user.xml" value="0.1995" />
+        <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/drawable/top_spinner.xml" value="0.1995" />
       </map>
     </option>
   </component>

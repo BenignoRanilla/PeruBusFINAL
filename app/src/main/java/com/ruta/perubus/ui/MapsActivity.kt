@@ -1,18 +1,23 @@
 package com.ruta.perubus.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.LatLngBounds
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
+import com.google.maps.android.PolyUtil
 import com.ruta.perubus.R
 import com.ruta.perubus.databinding.ActivityMapsBinding
 import com.ruta.perubus.models.Markers
+import org.json.JSONObject
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -72,15 +77,49 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         )
 
         val builder = LatLngBounds.Builder()
-        builder.include(user)
         builder.include(bus)
+        builder.include(user)
 
+        mMap.addMarker(
+            MarkerOptions()
+                .position(bus)
+                .title("Bus")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_bus_bitmap))
 
+        )
+        mMap.addMarker(
+            MarkerOptions()
+                .position(user)
+                .title("Usuario")
+            .icon(BitmapDescriptorFactory.fromResource(R.drawable.user))
+        )
 
-        mMap.addMarker(MarkerOptions().position(bus).title("Bus"))
-        mMap.addMarker(MarkerOptions().position(user).title("Usuario"))
+        mMap.setOnMapLoadedCallback {
+            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 100))
+        }
 
-        mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 100))
+        val path: MutableList<List<LatLng>> = ArrayList()
+        val urlDirections =
+            "https://maps.googleapis.com/maps/api/directions/json?origin=" + user.latitude + "," + user.longitude + "&destination=" + bus.latitude + "," + bus.longitude + "&key=AIzaSyANUI7icvsdQheil0YvU0vhkvEMxHrNz2w"
+        val directionsRequest = object :
+            StringRequest(Request.Method.GET, urlDirections, Response.Listener<String> { response ->
+                val jsonResponse = JSONObject(response)
+                // Get routes
+                val routes = jsonResponse.getJSONArray("routes")
+                val legs = routes.getJSONObject(0).getJSONArray("legs")
+                val steps = legs.getJSONObject(0).getJSONArray("steps")
+                for (i in 0 until steps.length()) {
+                    val points =
+                        steps.getJSONObject(i).getJSONObject("polyline").getString("points")
+                    path.add(PolyUtil.decode(points))
+                }
+                for (i in 0 until path.size) {
+                    this.mMap!!.addPolyline(PolylineOptions().addAll(path[i]).color(Color.RED))
+                }
+            }, Response.ErrorListener { _ ->
+            }) {}
+        val requestQueue = Volley.newRequestQueue(this)
+        requestQueue.add(directionsRequest)
 
     }
 
