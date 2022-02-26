@@ -16,17 +16,21 @@ import retrofit2.Response
 import javax.security.auth.callback.Callback
 
 class RegistroActivity : AppCompatActivity() {
+
+    val login: Button = findViewById(R.id.LoginCreate)
+    val nroCelular: EditText = findViewById(R.id.nroCelular)
+    val correo: EditText = findViewById(R.id.correo)
+    val nombre: EditText = findViewById(R.id.nombre)
+    val apellido: EditText = findViewById(R.id.apellido)
+    val pass: EditText = findViewById(R.id.Pass)
+    val repeatPass: EditText = findViewById(R.id.passRepeat)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registro)
 
         val context = this
-        val login: Button = findViewById(R.id.LoginCreate)
-        val nroCelular: EditText = findViewById(R.id.nroCelular)
-        val correo: EditText = findViewById(R.id.correo)
-        val nombre: EditText = findViewById(R.id.nombre)
-        val apellido: EditText = findViewById(R.id.apellido)
-        val pass: EditText = findViewById(R.id.Pass)
+
 //        val check: CheckBox = findViewById(R.id.checkBoxRegistro)
         val intent = Intent(this, CredentialActivity::class.java)
 
@@ -49,6 +53,7 @@ class RegistroActivity : AppCompatActivity() {
                         finish()
 //                        check.isChecked
                         var newCreateUser = response.body()
+                        validarCampos()
                         Toast.makeText(context, "Successfully Added", Toast.LENGTH_SHORT).show()
                         startActivity(intent)
                     }else{
@@ -62,5 +67,31 @@ class RegistroActivity : AppCompatActivity() {
             })
 
             }
+    }
+
+    private fun validarCampos(): Boolean {
+        var datosCorrectos = true
+        val context = this
+
+        if (nroCelular.text.toString().isNotEmpty()){
+            Toast.makeText(context, "Debe de ingresar un número de celular", Toast.LENGTH_SHORT).show()
+            datosCorrectos = false;
+        }else if(correo.text.toString().isNotEmpty()){
+            Toast.makeText(context, "Debe de ingresar un correo", Toast.LENGTH_SHORT).show()
+            datosCorrectos = false;
+        }else if(nombre.text.toString().isNotEmpty()){
+            Toast.makeText(context, "Debe de ingresar un nombre", Toast.LENGTH_SHORT).show()
+            datosCorrectos = false;
+        }else if(apellido.text.toString().isNotEmpty()) {
+            Toast.makeText(context, "Debe de ingresar un contraseña", Toast.LENGTH_SHORT).show()
+            datosCorrectos = false;
+        }else if(!pass.text.toString().isNotEmpty() || !repeatPass.text.toString().isNotEmpty()) {
+            if(!pass.text.toString().equals(repeatPass.text.toString())){
+                Toast.makeText(context, "Las contraseñas deben de coincidir", Toast.LENGTH_SHORT).show()
+                datosCorrectos = false;
+            }
+        }
+
+        return datosCorrectos
     }
 }

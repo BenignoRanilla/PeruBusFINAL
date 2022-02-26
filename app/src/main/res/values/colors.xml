@@ -11,4 +11,5 @@
     <color name="fondoTotal">#E5E5E5</color>
     <color name="colorPrimaryDark">#00000000</color>
     <color name="transparent">#00000000</color>
+    <color name="marcaPrimary"> #F1F0F0</color>
 </resources>
