@@ -2,13 +2,12 @@ package com.ruta.perubus.ui.select
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.ruta.perubus.models.Destino
-import com.ruta.perubus.models.Itinerario
-import com.ruta.perubus.models.ItinerarioInput
-import com.ruta.perubus.models.Origen
+import com.ruta.perubus.models.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class SelectBusViewModel constructor(private val repository: SelectBusRepository) : ViewModel() {
@@ -16,6 +15,7 @@ class SelectBusViewModel constructor(private val repository: SelectBusRepository
     val originList = MutableLiveData<List<Origen>>()
     val destinyList = MutableLiveData<List<Destino>>()
     val itinerarioList = MutableLiveData<List<Itinerario>>()
+    val tarifaResult = MutableLiveData<List<Price>>()
 
     val errorMessage = MutableLiveData<String>()
 
@@ -60,6 +60,56 @@ class SelectBusViewModel constructor(private val repository: SelectBusRepository
                 errorMessage.postValue(t.message)
             }
         })
+    }
+
+    fun getTarifa(currentItem: Bus, codRumbo: String, codigoOrigen: String, codigoDestino: String) {
+
+
+        val response = repository.getTarifaRuta(
+            codRumbo,
+            formatDate(currentItem.fechaProg),
+            currentItem.nuSecu,
+            currentItem.codEmpresa,
+            codigoOrigen,
+            codigoDestino
+        )
+
+        /*
+
+        val response = repository.getTarifaRuta(
+            "SUR",
+            "2021-12-10",
+            "27",
+            "01",
+            "0",
+            "8"
+        ) */
+
+        response.enqueue(object : Callback<List<Price>> {
+            override fun onResponse(
+                call: Call<List<Price>>,
+                response: Response<List<Price>>
+            ) {
+                tarifaResult.postValue(response.body())
+            }
+
+            override fun onFailure(call: Call<List<Price>>, t: Throwable) {
+                errorMessage.postValue(t.message)
+            }
+        })
+    }
+
+    private fun formatDate(fechaProg: String): String {
+        val year = fechaProg.substring(6, fechaProg.length)
+        val month = fechaProg.substring(3, 5)
+        val day = fechaProg.substring(0, 2)
+        return "$year-$month-$day"
+    }
+
+    fun getDate(date: Date?): String {
+        val sdf = SimpleDateFormat("yyyy-MM-dd")
+        val currentDate = sdf.format(date)
+        return currentDate
     }
 
 }

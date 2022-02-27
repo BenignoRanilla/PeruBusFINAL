@@ -11,4 +11,20 @@ class SelectBusRepository constructor(private val api: Api) {
     fun getItinerario(position: String, itinerario: ItinerarioInput) =
         api.ObtenerItinerario(position, itinerario)
 
+    fun getTarifaRuta(
+        codRumbo: String,
+        fechProg: String,
+        numSec: String,
+        coEmp: String,
+        codOrigen: String,
+        codFinal: String
+    ) = api.obtenerTarifaRuta(
+        codRumbo,
+        fechProg,
+        numSec,
+        coEmp,
+        codOrigen,
+        codFinal
+    )
+
 }

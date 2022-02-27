@@ -11,5 +11,6 @@ data class Markers(
     var fechaProg: String,
     var duracion : String,
     var tipoServicio : String,
-    var distancia: String
+    var distancia: String,
+    var tarifa: Int
 ) : Serializable

@@ -45,12 +45,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val tipoServicio: TextView = findViewById(R.id.tipoServicioValue)
         val duracion: TextView = findViewById(R.id.duracionValue)
         val distancia: TextView = findViewById(R.id.distanciaValue)
+        val precioValue: TextView = findViewById(R.id.precioValue)
+
 
         codbus.text = markers.codbus
         fechaProg.text = markers.fechaProg
         tipoServicio.text = markers.tipoServicio
         duracion.text = markers.duracion
-        distancia.text = markers.distancia    }
+        distancia.text = markers.distancia
+        precioValue.text = markers.tarifa.toString()
+    }
 
     /**
      * Manipulates the map once available.
@@ -90,7 +94,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             MarkerOptions()
                 .position(user)
                 .title("Usuario")
-            .icon(BitmapDescriptorFactory.fromResource(R.drawable.user))
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.user))
         )
 
         mMap.setOnMapLoadedCallback {

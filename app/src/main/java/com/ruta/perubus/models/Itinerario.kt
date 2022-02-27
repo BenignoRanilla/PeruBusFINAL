@@ -11,7 +11,9 @@ data class Itinerario(
     @SerializedName("distancia") var distancia: String,
     @SerializedName("duracion") var duracion: String,
     @SerializedName("latitude") var latitude: String,
-    @SerializedName("longitude") var longitude: String
+    @SerializedName("longitude") var longitude: String,
+    @SerializedName("codEmpresa") var codEmpresa: String,
+    @SerializedName("nuSecu") var nuSecu: Int
 )
 
 

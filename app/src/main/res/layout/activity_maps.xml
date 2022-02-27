@@ -170,6 +170,32 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/precioLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/distanciaLabel"
+                android:layout_alignStart="@+id/distanciaLabel"
+                android:paddingStart="20dp"
+                android:text="Precio (PEN): "
+                android:textColor="@color/redBus"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/precioValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/precioLabel"
+                android:layout_alignStart="@+id/fechaProgValue"
+                android:layout_toRightOf="@id/precioLabel"
+                android:maxLines="1"
+                android:paddingStart="20dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
         </RelativeLayout>
 
 

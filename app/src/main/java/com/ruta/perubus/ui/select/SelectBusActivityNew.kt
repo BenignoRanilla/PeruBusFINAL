@@ -20,7 +20,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.ruta.perubus.MapbusActivity
 import com.ruta.perubus.R
 import com.ruta.perubus.api.Api
 import com.ruta.perubus.api.RetrofitClient
@@ -29,7 +28,6 @@ import com.ruta.perubus.models.*
 import com.ruta.perubus.ui.MapsActivity
 import com.ruta.perubus.ui.select.adapter.RecyclerAdapter
 import com.ruta.perubus.ui.select.listener.IBusItemListener
-import java.text.SimpleDateFormat
 import java.util.*
 
 class SelectBusActivityNew : AppCompatActivity(), IBusItemListener {
@@ -42,6 +40,7 @@ class SelectBusActivityNew : AppCompatActivity(), IBusItemListener {
     private lateinit var linearLayoutManager: LinearLayoutManager
     lateinit var currentLatitude: String
     lateinit var currentLongitude: String
+    lateinit var currentItem: Bus
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -137,7 +136,9 @@ class SelectBusActivityNew : AppCompatActivity(), IBusItemListener {
                             itinerario.distancia,
                             itinerario.duracion,
                             itinerario.latitude,
-                            itinerario.longitude
+                            itinerario.longitude,
+                            itinerario.nuSecu.toString(),
+                            itinerario.codEmpresa
                         )
                     userArrayList.add(bus)
                 }
@@ -148,6 +149,28 @@ class SelectBusActivityNew : AppCompatActivity(), IBusItemListener {
 
             }
 
+        })
+
+        viewModel.tarifaResult.observe(this, Observer {
+            val intent = Intent(this, MapsActivity::class.java)
+
+
+            intent.putExtra(
+                "markers",
+                Markers(
+                    currentLatitude,
+                    currentLongitude,
+                    currentItem.latitude,
+                    currentItem.longitude,
+                    currentItem.codBus,
+                    currentItem.fechaProg,
+                    currentItem.duracion,
+                    currentItem.tipoServicio,
+                    currentItem.distancia,
+                    if (it.size > 0) it[0].precio else 0
+                )
+            )
+            startActivity(intent)
         })
 
         viewModel.getAllOrigins()
@@ -205,7 +228,7 @@ class SelectBusActivityNew : AppCompatActivity(), IBusItemListener {
                     viewModel.getItinerario(
                         location?.latitude.toString() + "," + location?.longitude.toString(),
                         ItinerarioInput(
-                            getDate(),
+                            viewModel.getDate(Date()),
                             (binding.SpinnerDestino.selectedItem as Destino).codRumbo,
                             (binding.SpinnerOrigen.selectedItem as Origen).codigoOrigen,
                             (binding.SpinnerDestino.selectedItem as Destino).codigoDestino
@@ -223,12 +246,6 @@ class SelectBusActivityNew : AppCompatActivity(), IBusItemListener {
         }
     }
 
-    private fun getDate(): String {
-        val sdf = SimpleDateFormat("yyyy-MM-dd")
-        val currentDate = sdf.format(Date())
-        return currentDate
-
-    }
 
     private fun requestPermissions() {
         ActivityCompat.requestPermissions(
@@ -242,14 +259,17 @@ class SelectBusActivityNew : AppCompatActivity(), IBusItemListener {
     }
 
     override fun onBusItemClickListener(currentItem: Bus) {
-        val intent = Intent(this, MapsActivity::class.java)
 
-        intent.putExtra(
-            "markers",
-            Markers(currentLatitude, currentLongitude, currentItem.latitude, currentItem.longitude, currentItem.codBus, currentItem.fechaProg,
-            currentItem.duracion, currentItem.tipoServicio, currentItem.distancia)
+        viewModel.getTarifa(
+            currentItem,
+            (binding.SpinnerDestino.selectedItem as Destino).codRumbo,
+            (binding.SpinnerOrigen.selectedItem as Origen).codigoOrigen,
+            (binding.SpinnerDestino.selectedItem as Destino).codigoDestino
         )
-        startActivity(intent)
+
+        this.currentItem = currentItem
+
+
     }
 
 
