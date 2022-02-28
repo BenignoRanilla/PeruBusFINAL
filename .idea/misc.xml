@@ -76,9 +76,12 @@
         <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/drawable/ic_user.xml" value="0.1995" />
         <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/drawable/top_round_border.xml" value="0.1995" />
         <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/drawable/top_spinner.xml" value="0.1995" />
+        <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/layout/activity_beginning.xml" value="0.19166666666666668" />
         <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/layout/activity_credential.xml" value="0.19166666666666668" />
         <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/layout/activity_mapbus.xml" value="0.19166666666666668" />
         <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/layout/activity_maps.xml" value="0.33" />
+        <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/layout/activity_registro.xml" value="0.19166666666666668" />
+        <entry key="..\:/rguevara/puerbus/PeruBus/app/src/main/res/layout/activity_selectbus.xml" value="0.19166666666666668" />
       </map>
     </option>
   </component>
