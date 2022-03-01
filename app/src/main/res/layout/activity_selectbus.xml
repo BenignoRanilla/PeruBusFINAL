@@ -31,30 +31,54 @@
             tools:listitem="@layout/list_item" />
 
     </LinearLayout>
+    <TextView
+        android:id="@+id/textViewOrigen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="28dp"
+        android:text="Origen: "
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Spinner
         android:id="@+id/SpinnerOrigen"
-        android:layout_width="280dp"
-        android:layout_height="60dp"
+        style="@style/SpinnerTheme"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/top_spinner"
         android:spinnerMode="dialog"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.176"
+        app:layout_constraintStart_toEndOf="@+id/textViewOrigen"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewDestino"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:text="Destino: "
+        android:textSize="15dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/SpinnerTheme"/>
+        app:layout_constraintTop_toBottomOf="@+id/SpinnerOrigen" />
 
     <Spinner
         android:id="@+id/SpinnerDestino"
-        android:layout_width="280dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
+        style="@style/SpinnerTheme"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/top_spinner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SpinnerOrigen"
-        style="@style/SpinnerTheme"/>
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@+id/textViewDestino"
+        app:layout_constraintTop_toBottomOf="@+id/SpinnerOrigen" />
 
     <LinearLayout
         android:id="@+id/idDatos"

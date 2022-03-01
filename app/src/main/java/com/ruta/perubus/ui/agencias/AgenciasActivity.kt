@@ -118,5 +118,4 @@ class AgenciasActivity : AppCompatActivity(), OnMapReadyCallback {
         viewModel.getAgencias()
     }
 
-
 }
