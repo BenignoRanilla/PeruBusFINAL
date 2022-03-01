@@ -46,7 +46,7 @@ class AgenciasActivity : AppCompatActivity(), OnMapReadyCallback {
             )
 
         viewModel.agenciaList.observe(this, Observer {
-            val builder = LatLngBounds.Builder()
+            //val builder = LatLngBounds.Builder()
             for (agencia in it) {
 
                 val marker = LatLng(
@@ -63,10 +63,13 @@ class AgenciasActivity : AppCompatActivity(), OnMapReadyCallback {
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_bus_bitmap))
                 )
 
+                /*
                 builder.include(marker)
                 mMap.setOnMapLoadedCallback {
                     mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 100))
                 }
+
+                 */
                 mMap.uiSettings.isMapToolbarEnabled = false;
             }
 
@@ -110,6 +113,7 @@ class AgenciasActivity : AppCompatActivity(), OnMapReadyCallback {
                 .title("Usuario")
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.user))
         )
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user,11.0f))
 
         viewModel.getAgencias()
     }
