@@ -26,6 +26,7 @@ import com.ruta.perubus.api.RetrofitClient
 import com.ruta.perubus.databinding.ActivitySelectbusBinding
 import com.ruta.perubus.models.*
 import com.ruta.perubus.ui.MapsActivity
+import com.ruta.perubus.ui.agencias.AgenciasActivity
 import com.ruta.perubus.ui.select.adapter.RecyclerAdapter
 import com.ruta.perubus.ui.select.listener.IBusItemListener
 import java.util.*
@@ -37,7 +38,6 @@ class SelectBusActivityNew : AppCompatActivity(), IBusItemListener {
     val PERMISSION_ID = 42
     private lateinit var userArrayList: ArrayList<Bus>
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
-    private lateinit var linearLayoutManager: LinearLayoutManager
     lateinit var currentLatitude: String
     lateinit var currentLongitude: String
     lateinit var currentItem: Bus
@@ -154,7 +154,6 @@ class SelectBusActivityNew : AppCompatActivity(), IBusItemListener {
         viewModel.tarifaResult.observe(this, Observer {
             val intent = Intent(this, MapsActivity::class.java)
 
-
             intent.putExtra(
                 "markers",
                 Markers(
@@ -174,6 +173,28 @@ class SelectBusActivityNew : AppCompatActivity(), IBusItemListener {
         })
 
         viewModel.getAllOrigins()
+
+        binding.fabAgencias.setOnClickListener {
+            val intent = Intent(this, AgenciasActivity::class.java)
+            intent.putExtra(
+                "markers",
+                Markers(
+                    currentLatitude,
+                    currentLongitude,
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    0
+                )
+            )
+            startActivity(intent)
+
+        }
+
 
     }
 

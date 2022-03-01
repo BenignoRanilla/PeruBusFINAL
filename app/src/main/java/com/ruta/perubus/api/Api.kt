@@ -37,7 +37,10 @@ interface Api {
         @Path("pCO_EMPR") coEmp: String,
         @Path("pCO_DEST_ORIG") codOrigen: String,
         @Path("pCO_DEST_FINA") codFinal: String
-    ) : retrofit2.Call<List<Price>>
+    ): retrofit2.Call<List<Price>>
+
+    @GET("/Agencias/ObtenerGPSAgencias")
+    fun obtenerAgencias(): retrofit2.Call<List<Agencia>>
 
 
 }
