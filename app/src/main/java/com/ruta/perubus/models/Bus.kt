@@ -1,7 +1,7 @@
 package com.ruta.perubus.models
 
 data class Bus(
-    var fechaProg: String,
+    var FeProg: String,
     var codBus: String,
     var tipoServicio: String,
     var map3: String,

@@ -29,9 +29,8 @@ interface Api {
     @GET("/Tramos/ObtenerDestinoRumbo/{origin}")
     fun obtenerDestino(@Path("origin") origin: String): retrofit2.Call<List<Destino>>
 
-    @GET("/TarifaRuta/ObtenerTarifaRuta/{pCO_RUMB}/{pFE_PROG}/{pNU_SECU}/{pCO_EMPR}/{pCO_DEST_ORIG}/{pCO_DEST_FINA}")
+    @GET("/TarifaRuta/ObtenerTarifaRuta/{pFE_PROG}/{pNU_SECU}/{pCO_EMPR}/{pCO_DEST_ORIG}/{pCO_DEST_FINA}")
     fun obtenerTarifaRuta(
-        @Path("pCO_RUMB") codRumbo: String,
         @Path("pFE_PROG") fechProg: String,
         @Path("pNU_SECU") numSec: String,
         @Path("pCO_EMPR") coEmp: String,

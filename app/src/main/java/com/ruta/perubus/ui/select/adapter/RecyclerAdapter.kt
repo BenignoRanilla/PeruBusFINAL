@@ -28,7 +28,7 @@ class RecyclerAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = itinerarioList[position]
-        holder.fechaProg.text = currentItem.fechaProg
+        holder.fechaProg.text = currentItem.FeProg
         holder.codBus.text = currentItem.codBus
         holder.tipoServicio.text = currentItem.tipoServicio
         holder.duracion.text = currentItem.duracion

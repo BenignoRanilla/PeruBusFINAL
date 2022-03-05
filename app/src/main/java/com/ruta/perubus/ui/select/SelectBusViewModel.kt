@@ -47,7 +47,7 @@ class SelectBusViewModel constructor(private val repository: SelectBusRepository
 
     fun getItinerario(position: String, itinerario: ItinerarioInput) {
         val response = repository.getItinerario(position, itinerario)
-        println("Posicion: $position" )
+        println("Posicion: $position")
         //val response = repository.getItinerario("-14.018002,-75.734469", itinerario)
         response.enqueue(object : Callback<List<Itinerario>> {
             override fun onResponse(
@@ -63,12 +63,11 @@ class SelectBusViewModel constructor(private val repository: SelectBusRepository
         })
     }
 
-    fun getTarifa(currentItem: Bus, codRumbo: String, codigoOrigen: String, codigoDestino: String) {
+    fun getTarifa(currentItem: Bus, codigoOrigen: String, codigoDestino: String) {
 
 
         val response = repository.getTarifaRuta(
-            codRumbo,
-            formatDate(currentItem.fechaProg),
+            formatDate(currentItem.FeProg),
             currentItem.nuSecu,
             currentItem.codEmpresa,
             codigoOrigen,

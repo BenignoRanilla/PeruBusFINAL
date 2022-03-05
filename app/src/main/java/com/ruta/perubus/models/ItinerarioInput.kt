@@ -1,3 +1,3 @@
 package com.ruta.perubus.models
 
-data class ItinerarioInput(var fechaProg: String, var CoRumb: String, var CoDestOrig: String, var CoDestFina: String)
+data class ItinerarioInput(var FeProg: String, var CoDestOrig: String, var CoDestFina: String)

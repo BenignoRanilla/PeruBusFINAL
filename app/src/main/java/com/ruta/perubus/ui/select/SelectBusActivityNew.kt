@@ -163,7 +163,7 @@ class SelectBusActivityNew : AppCompatActivity(), IBusItemListener {
                     currentItem.latitude,
                     currentItem.longitude,
                     currentItem.codBus,
-                    currentItem.fechaProg,
+                    currentItem.FeProg,
                     currentItem.duracion,
                     currentItem.tipoServicio,
                     currentItem.distancia,
@@ -251,7 +251,6 @@ class SelectBusActivityNew : AppCompatActivity(), IBusItemListener {
                         location?.latitude.toString() + "," + location?.longitude.toString(),
                         ItinerarioInput(
                             viewModel.getDate(Date()),
-                            (binding.SpinnerDestino.selectedItem as Destino).codRumbo,
                             (binding.SpinnerOrigen.selectedItem as Origen).codigoOrigen,
                             (binding.SpinnerDestino.selectedItem as Destino).codigoDestino
                         )
@@ -291,7 +290,6 @@ class SelectBusActivityNew : AppCompatActivity(), IBusItemListener {
         } else {
             viewModel.getTarifa(
                 currentItem,
-                (binding.SpinnerDestino.selectedItem as Destino).codRumbo,
                 (binding.SpinnerOrigen.selectedItem as Origen).codigoOrigen,
                 (binding.SpinnerDestino.selectedItem as Destino).codigoDestino
             )

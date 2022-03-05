@@ -13,7 +13,8 @@ data class Itinerario(
     @SerializedName("latitude") var latitude: String,
     @SerializedName("longitude") var longitude: String,
     @SerializedName("codEmpresa") var codEmpresa: String,
-    @SerializedName("nuSecu") var nuSecu: Int
+    @SerializedName("nuSecu") var nuSecu: Int,
+    @SerializedName("codRumbo") var codRumbo: String
 )
 
 

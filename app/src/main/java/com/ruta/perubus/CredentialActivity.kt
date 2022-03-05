@@ -52,6 +52,7 @@ class CredentialActivity : AppCompatActivity() {
         val username: EditText = findViewById(R.id.username)
         val password: EditText = findViewById(R.id.password)
         val facebook: Button = findViewById(R.id.login_button)
+        val intent = Intent(this, SelectBusActivityNew::class.java)
 
         loginUser.setOnClickListener {
             celular = username.text.toString().trim()
@@ -82,6 +83,7 @@ class CredentialActivity : AppCompatActivity() {
 
                             val credential = FacebookAuthProvider.getCredential(token.token)
 
+
                             FirebaseAuth.getInstance().signInWithCredential(credential)
                                 .addOnCompleteListener {
                                     if (it.isSuccessful) {
@@ -89,6 +91,8 @@ class CredentialActivity : AppCompatActivity() {
                                             it.result?.user?.email ?: "",
                                             ProviderType.Facebook
                                         )
+
+                                        startActivity(intent)
                                     } else {
                                         showAlert()
                                     }

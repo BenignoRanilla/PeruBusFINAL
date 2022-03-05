@@ -39,6 +39,7 @@
       android:id="@+id/nroCelular"
       android:layout_width="320dp"
       android:layout_height="48dp"
+      android:maxLength="9"
       android:layout_marginTop="52dp"
       android:background="@drawable/edit_text_background"
       android:drawableStart="@drawable/ic_baseline_phone"

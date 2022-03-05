@@ -27,7 +27,7 @@ class MyAdapter(private val context: Activity, private val arraylist: ArrayList<
         val duracion : TextView = view.findViewById(R.id.duracion)
 
         codBus.text = arraylist[position].codBus
-        fechaProg.text = arraylist[position].fechaProg
+        fechaProg.text = arraylist[position].FeProg
         tipoServicio.text = arraylist[position].tipoServicio
         map3.text = arraylist[position].map3
         distancia.text = arraylist[position].distancia
